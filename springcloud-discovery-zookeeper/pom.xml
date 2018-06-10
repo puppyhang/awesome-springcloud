@@ -1,0 +1,74 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.ternence.boot</groupId>
+        <artifactId>awesome-springcloud</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>springcloud-discovery-zookeeper</artifactId>
+    <packaging>jar</packaging>
+    <!--这里显示在maven navigation bar中-->
+    <name>springcloud-discovery-zookeeper</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!--(1)整合日志框架-->
+        <!--增加这个依赖之后日志框架就使用slf4j + logback,其他的日志会被桥接到slf4j输出-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+        </dependency>
+
+        <!--(2)整合spring的基础jar包-->
+        <!--增加这个依赖之后项目中就会依赖spring-core aop beans context expression-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+        </dependency>
+
+        <!--(3)提供自动配置的功能(开箱既用)-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+
+        <!--(4)解析yaml配置文件-->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!--这个依赖整合的是以上(1,2,3,4)依赖整合的内容-->
+        <!--可以用这一个替换以上四个-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>-->
+
+        <!--整合spring mvc相关依赖,包括jackson，spring-mvc，tomcat-embed-->
+        <!--hibernate-validator等等-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!--Maven会沿着父子层次向上走，直到找到一个拥有dependencyManagement元素的项目，
+        然后它就会使用在这个dependencyManagement元素中指定的版本号。-->
+        <!--虽然他左边没有向上的箭头,但是他也是继承的spring cloud的依赖管理中的版本-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-zookeeper-all</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+    </build>
+</project>

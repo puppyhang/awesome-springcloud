@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.9.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.ternence.boot</groupId>
+    <artifactId>awesome-springcloud</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>springcloud-discovery-zookeeper</module>
+        <module>springcloud-discovery-eureka</module>
+        <module>springcloud-discovery-eureka-client</module>
+    </modules>
+    <packaging>pom</packaging>
+    <name>awesome-springcloud</name>
+    <description>Demo project for Spring Cloud</description>
+
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <!--plugins version management-->
+        <docker-plugin.version>1.0.0</docker-plugin.version>
+        <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+        <maven-duplicate-finder-plugin.version>1.0.8</maven-duplicate-finder-plugin.version>
+
+        <!--dependencies version management-->
+    </properties>
+
+    <!--这些依赖会被所有的子项目继承-->
+    <dependencies>
+
+    </dependencies>
+
+    <!--管理需要的依赖项目,spring相关的依赖都会由spring-boot-starter-parent管理-->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Edgware.SR1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+
+        <!--公共的依赖插件,会被所有的子项目继承-->
+        <plugins>
+
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <!--重复依赖检测的工具-->
+                <!--https://github.com/ning/maven-duplicate-finder-plugin-->
+                <plugin>
+                    <groupId>com.ning.maven.plugins</groupId>
+                    <artifactId>maven-duplicate-finder-plugin</artifactId>
+                    <version>${maven-duplicate-finder-plugin.version}</version>
+                </plugin>
+                <!--运行spring boot项目的插件-->
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <!--default version extends from spring bom-->
+                </plugin>
+                <!--打包spring boot项目为 docker镜像的工具-->
+                <plugin>
+                    <groupId>com.spotify</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker-plugin.version}</version>
+                </plugin>
+                <!--各种代码规范检查的插件-->
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-checkstyle-plugin</artifactId>
+                    <version>${maven-checkstyle-plugin.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+
+</project>
